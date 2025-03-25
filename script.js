@@ -1,26 +1,24 @@
-//your JS code here. If required.
-document.addEventListener("DOMContentLoaded", function() {
-    const codes = document.querySelectorAll(".code");
+    document.addEventListener("DOMContentLoaded", function() {
+            const codes = document.querySelectorAll(".code");
 
-    codes[0].focus(); // Auto-focus on first input
+            codes[0].focus(); // Auto-focus first input
 
-    codes.forEach((code, index) => {
-        code.addEventListener("input", (e) => {
-            if (e.target.value.match(/[0-9]/)) {  // Allow only numbers
-                if (index < codes.length - 1) {
-                    codes[index + 1].focus();  // Move to next input
-                }
-            } else {
-                e.target.value = "";  // Clear invalid input
-            }
+            codes.forEach((code, index) => {
+                code.addEventListener("input", (e) => {
+                    if (e.target.value.match(/\d/)) { // Allow only numbers
+                        if (index < codes.length - 1) {
+                            codes[index + 1].focus(); // Move to next field
+                        }
+                    } else {
+                        e.target.value = ""; // Clear invalid input
+                    }
+                });
+
+                code.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace" && e.target.value === "" && index > 0) {
+                        codes[index - 1].focus(); // Move focus back
+                    }
+                });
+            });
         });
-
-        code.addEventListener("keydown", (e) => {
-            if (e.key === "Backspace") {
-                if (e.target.value === "" && index > 0) {
-                    codes[index - 1].focus();  // Move focus back
-                }
-            }
-        });
-    });
-});
+   
